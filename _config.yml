@@ -1,0 +1,66 @@
+# HySuite Website - Jekyll Configuration
+
+# Site settings
+title: HySuite
+description: Complete Server Essentials for Hytale
+url: "https://kckonicki.github.io"
+baseurl: "/HySuite"
+author: BudMods
+
+# GitHub repository
+repository: Kckonicki/HySuite
+
+# Build settings
+markdown: kramdown
+theme: jekyll-theme-cayman
+
+# Plugins
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+# Exclude from build
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - node_modules
+  - package.json
+  - package-lock.json
+
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /docs/:path/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "default"
+
+# SEO
+twitter:
+  username: Kellen_Konicki
+  card: summary_large_image
+
+social:
+  name: Buddytohelpu
+  links:
+    - https://twitter.com/Kellen_Konicki
+    - https://github.com/Kckonicki/HySuite
+
+# Google Analytics (add your ID when ready)
+# google_analytics: UA-XXXXXXXXX-X
+
+# Sass/SCSS
+sass:
+  style: compressed
+  
+# Timezone
+timezone: America/New_York

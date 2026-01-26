@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete permissions reference for HySuite - All permission nodes and usage">
+    <title>Permissions Reference - HySuite</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/docs.css">
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="../images/logo.svg" alt="HySuite Logo" class="logo">
+                <a href="../index.html" style="color:white;text-decoration:none;">HySuite</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="installation.html">Docs</a></li>
+                <li><a href="../index.html#download">Download</a></li>
+                <li><a href="https://discord.gg/vPHmVASQAN" target="_blank">Discord</a></li>
+                <li><a href="https://github.com/Kckonicki/HySuite" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="docs-container">
+        <aside class="docs-sidebar">
+            <h3>Documentation</h3>
+            <ul>
+                <li><a href="installation.html">Installation</a></li>
+                <li><a href="commands.html">Commands</a></li>
+                <li><a href="permissions.html" class="active">Permissions</a></li>
+                <li><a href="config.html">Configuration</a></li>
+            </ul>
+        </aside>
+
+        <main class="docs-content">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>›</span>
+                <span>Permissions</span>
+            </div>
+
+            <h1>Permissions Reference</h1>
+            <p>Complete list of all HySuite permission nodes for fine-grained access control.</p>
+
+            <div class="alert alert-info">
+                <strong>Note:</strong> All permissions use the <code>hysuite.</code> prefix. Player commands (TPA, homes, warps, spawn) don't require permissions by default.
+            </div>
+
+            <h2 id="quick-setup">Quick Setup Examples</h2>
+            
+            <h3>Give Player Full Admin</h3>
+            <pre><code>/lp user &lt;name&gt; permission set hysuite.admin.* true
+/lp user &lt;name&gt; permission set hysuite.fly true
+/lp user &lt;name&gt; permission set hysuite.vanish true
+/lp user &lt;name&gt; permission set hysuite.setwarp true
+/lp user &lt;name&gt; permission set hysuite.delwarp true</code></pre>
+
+            <h3>Create VIP Group</h3>
+            <pre><code>/lp creategroup VIP
+/lp group VIP permission set hysuite.vip true
+/lp group VIP permission set hysuite.vip.homes true
+/lp group VIP permission set hysuite.vip.cooldown true
+/lp group VIP permission set hysuite.cooldown.bypass true</code></pre>
+
+            <h3>Create Moderator Group</h3>
+            <pre><code>/lp creategroup Moderator
+/lp group Moderator permission set hysuite.adminchat.staff true
+/lp group Moderator permission set hysuite.vanish true
+/lp group Moderator permission set hysuite.htp true
+/lp group Moderator permission set hysuite.htphere true</code></pre>
+
+            <h2 id="admin-permissions">Admin Permissions</h2>
+            
+            <table class="permission-table">
+                <thead>
+                    <tr>
+                        <th>Permission</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>hysuite.admin.ranks</code></td>
+                        <td>Access rank management GUI</td>
+                        <td>OP</td>
+                    </tr>
+                    <tr>
+                        <td><code>hysuite.admin.setrank</code></td>
+                        <td>Set or remove player ranks</td>
+                        <td>OP</td>
+                    </tr>
+                    <tr>
+                        <td><code>hysuite.admin.playerinfo</code></td>
+                        <td>View detailed player information</td>
+                        <td>OP</td>
+                    </tr>
+                    <tr>
+                        <td><code>hysuite.admin.reload</code></td>
+                        <td>Reload plugin configuration</td>
+                        <td>OP</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 id="communication-permissions">Communication Permissions</h2>
+            
+            <table class="permission-table">
+                <thead>
+                    <tr>
+                        <th>Permission</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>hysuite.adminchat.staff</code></td>
+                        <td>Access staff chat channel</td>
+                        <td>OP</td>
+                    </tr>
+                    <tr>
+                        <td><code>hysuite.adminchat.admin</code></td>
+                        <td>Access admin chat channel</td>
+                        <td>OP</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Chat Channel Details</h3>
+            <ul>
+                <li><strong>Staff Chat</strong> - For moderators and staff members</li>
+                <li><strong>Admin Chat</strong> - For administrators only (higher level)</li>
+                <li>Toggle with <code>/adminchat [staff|admin]</code></li>
+            </ul>
+
+            <h2 id="utility-permissions">Utility Permissions</h2>
+            
+            <table class="permission-table">
+                <thead>
+                    <tr>
+                        <th>Permission</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>hysuite.vanish</code></td>
+                        <td>Toggle vanish mode (invisible to players)</td>
+                        <td>OP</td>
+                    </tr>
+                    <tr>
+                        <td><code>hysuite.fly</code></td>
+                        <td>Toggle fly mode</td>
+                        <td>OP</td>
+                    </tr>
+                    <tr>
+                        <td><code>hysuite.htp</code></td>
+                        <td>Teleport to other players</td>
+                        <td>OP</td>
+                    </tr>
+                    <tr>
+                        <td><code>hysuite.htphere</code></td>
+                        <td>Teleport players to you</td>
+                        <td>OP</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 id="warp-permissions">Warp Management Permissions</h2>
+            
+            <table class="permission-table">
+                <thead>
+                    <tr>
+                        <th>Permission</th>
+                        <th>Description</th>
+                        <th>Default</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>hysuite.setwarp</code></td>
+                        <td>Create server warps</td>
+                        <td>OP</td>
+                    </tr>
+                    <tr>
+                        <td><code>hysuite.delwarp</code></td>
+                        <td>Delete server warps</td>
+                        <td>OP</td>
+                    </tr>
+                    <tr>
+                        <td><code>hysuite.setspawn</code></td>
+                        <td>Set server spawn point</td>
+                        <td>OP</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-info">
+                <strong>Note:</strong> Players don't need permissions to use warps (<code>/warp</code>, <code>/warps</code>) or spawn (<code>/spawn</code>).
+            </div>
+
+            <h2 id="vip-permissions">VIP Permissions</h2>
+            
+            <table class="permission-table">
+                <thead>
+                    <tr>
+                        <th>Permission</th>
+                        <th>Description</th>
+                        <th>Benefit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>hysuite.vip</code></td>
+                        <td>VIP status marker</td>
+                        <td>Recognition, special features</td>
+                    </tr>
+                    <tr>
+                        <td><code>hysuite.vip.homes</code></td>
+                        <td>Increased home slots</td>
+                        <td>10 homes instead of 3 (configurable)</td>
+                    </tr>
+                    <tr>
+                        <td><code>hysuite.vip.cooldown</code></td>
+                        <td>Reduced cooldown times</td>
+                        <td>50% faster cooldowns (configurable)</td>
+                    </tr>
+                    <tr>
+                        <td><code>hysuite.cooldown.bypass</code></td>
+                        <td>Bypass all cooldowns & warmups</td>
+                        <td>Instant teleports, no delays</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>VIP Configuration</h3>
+            <p>Customize VIP benefits in <code>config.json</code>:</p>
+            <pre><code>{
+  "maxHomes": 3,           // Default players
+  "vipMaxHomes": 10,       // VIP players
+  "teleportCooldown": 30,  // Default cooldown
+  "vipCooldownReduction": 0.5  // 50% reduction for VIPs
+}</code></pre>
+
+            <h2 id="rank-permissions">Rank-Based Permissions</h2>
+            
+            <table class="permission-table">
+                <thead>
+                    <tr>
+                        <th>Permission Pattern</th>
+                        <th>Description</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>hysuite.rank.*</code></td>
+                        <td>Wildcard for all rank permissions</td>
+                        <td>Admin groups</td>
+                    </tr>
+                    <tr>
+                        <td><code>hysuite.rank.&lt;rankid&gt;</code></td>
+                        <td>Specific rank assignment</td>
+                        <td><code>hysuite.rank.moderator</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-warning">
+                <strong>Important:</strong> Ranks are managed through HySuite's internal system. These permissions are auto-assigned when using the rank GUI.
+            </div>
+
+            <h2 id="permission-hierarchy">Permission Hierarchy</h2>
+            
+            <h3>Recommended Group Structure</h3>
+            <pre><code>Default (All Players)
+├── None (all player commands work by default)
+└── Access to: TPA, homes, warps, spawn, messaging
+
+VIP
+├── Inherits: Default
+├── hysuite.vip
+├── hysuite.vip.homes
+├── hysuite.vip.cooldown
+└── hysuite.cooldown.bypass
+
+Helper
+├── Inherits: VIP
+├── hysuite.adminchat.staff
+└── hysuite.vanish
+
+Moderator
+├── Inherits: Helper
+├── hysuite.htp
+├── hysuite.htphere
+└── hysuite.admin.playerinfo
+
+Admin
+├── Inherits: Moderator
+├── hysuite.admin.ranks
+├── hysuite.admin.setrank
+├── hysuite.admin.reload
+├── hysuite.adminchat.admin
+├── hysuite.fly
+├── hysuite.setwarp
+├── hysuite.delwarp
+└── hysuite.setspawn</code></pre>
+
+            <h2 id="wildcard-permissions">Wildcard Permissions</h2>
+            
+            <table class="permission-table">
+                <thead>
+                    <tr>
+                        <th>Wildcard</th>
+                        <th>Grants</th>
+                        <th>Use Case</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>hysuite.*</code></td>
+                        <td>All HySuite permissions</td>
+                        <td>Owner/Full Admin</td>
+                    </tr>
+                    <tr>
+                        <td><code>hysuite.admin.*</code></td>
+                        <td>All admin commands</td>
+                        <td>Server Admins</td>
+                    </tr>
+                    <tr>
+                        <td><code>hysuite.adminchat.*</code></td>
+                        <td>All chat channels</td>
+                        <td>Staff members</td>
+                    </tr>
+                    <tr>
+                        <td><code>hysuite.vip.*</code></td>
+                        <td>All VIP perks</td>
+                        <td>VIP donors</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="alert alert-danger">
+                <strong>Warning:</strong> Be careful with wildcards! <code>hysuite.*</code> grants ALL permissions including destructive commands.
+            </div>
+
+            <h2 id="no-permission-needed">No Permission Needed</h2>
+            
+            <p>These commands work for all players by default:</p>
+            <ul>
+                <li>All TPA commands (<code>/tpa</code>, <code>/tpahere</code>, <code>/tpaccept</code>, <code>/tpdeny</code>, <code>/tpcancel</code>)</li>
+                <li>All home commands (<code>/sethome</code>, <code>/home</code>, <code>/delhome</code>, <code>/homes</code>)</li>
+                <li>Warp usage (<code>/warp</code>, <code>/warps</code>)</li>
+                <li>Spawn teleport (<code>/spawn</code>)</li>
+                <li>Utility (<code>/back</code>, <code>/rtp</code>)</li>
+                <li>Messaging (<code>/msg</code>, <code>/reply</code>)</li>
+            </ul>
+
+            <h2 id="permission-plugin-examples">Permission Plugin Examples</h2>
+            
+            <h3>LuckPerms</h3>
+            <pre><code># Create group
+/lp creategroup VIP
+
+# Add permissions
+/lp group VIP permission set hysuite.vip true
+/lp group VIP permission set hysuite.cooldown.bypass true
+
+# Add player to group
+/lp user &lt;name&gt; parent add VIP
+
+# Remove permission
+/lp user &lt;name&gt; permission unset hysuite.fly</code></pre>
+
+            <h3>PermissionsEx (PEX)</h3>
+            <pre><code># Add permission to group
+/pex group VIP add hysuite.vip
+
+# Add permission to user
+/pex user &lt;name&gt; add hysuite.fly
+
+# Set group
+/pex user &lt;name&gt; group set VIP</code></pre>
+
+            <h2 id="testing-permissions">Testing Permissions</h2>
+            
+            <h3>Check if Permission Works</h3>
+            <pre><code># LuckPerms
+/lp user &lt;name&gt; permission check hysuite.fly
+
+# PermissionsEx
+/pex user &lt;name&gt; has hysuite.fly</code></pre>
+
+            <h3>Debug Permission Issues</h3>
+            <ol>
+                <li>Verify permission is spelled correctly (<code>hysuite.</code> prefix)</li>
+                <li>Check player's group has the permission</li>
+                <li>Reload permissions: <code>/lp sync</code> or <code>/pex reload</code></li>
+                <li>Check for negated permissions (- prefix)</li>
+                <li>Verify player is in correct group</li>
+            </ol>
+
+            <h2 id="complete-list">Complete Permission List</h2>
+            
+            <table class="permission-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Permission Node</th>
+                        <th>Category</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td><code>hysuite.admin.ranks</code></td><td>Admin</td></tr>
+                    <tr><td>2</td><td><code>hysuite.admin.setrank</code></td><td>Admin</td></tr>
+                    <tr><td>3</td><td><code>hysuite.admin.playerinfo</code></td><td>Admin</td></tr>
+                    <tr><td>4</td><td><code>hysuite.admin.reload</code></td><td>Admin</td></tr>
+                    <tr><td>5</td><td><code>hysuite.adminchat.staff</code></td><td>Communication</td></tr>
+                    <tr><td>6</td><td><code>hysuite.adminchat.admin</code></td><td>Communication</td></tr>
+                    <tr><td>7</td><td><code>hysuite.vanish</code></td><td>Utility</td></tr>
+                    <tr><td>8</td><td><code>hysuite.fly</code></td><td>Utility</td></tr>
+                    <tr><td>9</td><td><code>hysuite.htp</code></td><td>Teleport</td></tr>
+                    <tr><td>10</td><td><code>hysuite.htphere</code></td><td>Teleport</td></tr>
+                    <tr><td>11</td><td><code>hysuite.setwarp</code></td><td>Warp</td></tr>
+                    <tr><td>12</td><td><code>hysuite.delwarp</code></td><td>Warp</td></tr>
+                    <tr><td>13</td><td><code>hysuite.setspawn</code></td><td>Spawn</td></tr>
+                    <tr><td>14</td><td><code>hysuite.vip</code></td><td>VIP</td></tr>
+                    <tr><td>15</td><td><code>hysuite.vip.homes</code></td><td>VIP</td></tr>
+                    <tr><td>16</td><td><code>hysuite.vip.cooldown</code></td><td>VIP</td></tr>
+                    <tr><td>17</td><td><code>hysuite.cooldown.bypass</code></td><td>VIP</td></tr>
+                </tbody>
+            </table>
+
+            <p><strong>Total:</strong> 17 permission nodes</p>
+
+            <div class="page-nav">
+                <a href="commands.html" class="page-nav-link page-nav-prev">
+                    <span class="page-nav-label">← Previous</span>
+                    <span class="page-nav-title">Commands</span>
+                </a>
+                <a href="config.html" class="page-nav-link page-nav-next">
+                    <span class="page-nav-label">Next →</span>
+                    <span class="page-nav-title">Configuration</span>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 HySuite by Buddytohelpu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

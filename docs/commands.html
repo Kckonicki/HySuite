@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete command reference for HySuite - All available commands and their usage">
+    <title>Commands Reference - HySuite</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/docs.css">
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="../images/logo.svg" alt="HySuite Logo" class="logo">
+                <a href="../index.html" style="color:white;text-decoration:none;">HySuite</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="installation.html">Docs</a></li>
+                <li><a href="../index.html#download">Download</a></li>
+                <li><a href="https://discord.gg/vPHmVASQAN" target="_blank">Discord</a></li>
+                <li><a href="https://github.com/Kckonicki/HySuite" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="docs-container">
+        <aside class="docs-sidebar">
+            <h3>Documentation</h3>
+            <ul>
+                <li><a href="installation.html">Installation</a></li>
+                <li><a href="commands.html" class="active">Commands</a></li>
+                <li><a href="permissions.html">Permissions</a></li>
+                <li><a href="config.html">Configuration</a></li>
+            </ul>
+        </aside>
+
+        <main class="docs-content">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>›</span>
+                <span>Commands</span>
+            </div>
+
+            <h1>Commands Reference</h1>
+            <p>Complete list of all HySuite commands with usage examples and descriptions.</p>
+
+            <div class="alert alert-info">
+                <strong>Tip:</strong> Most commands have configurable cooldowns and warmups. Check the <a href="config.html">configuration guide</a> for details.
+            </div>
+
+            <h2 id="main-commands">Main Commands</h2>
+            
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Permission</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/hysuite</code></td>
+                        <td>Main admin command with subcommands</td>
+                        <td>Various (see admin section)</td>
+                    </tr>
+                    <tr>
+                        <td><code>/hys</code></td>
+                        <td>Short alias for /hysuite</td>
+                        <td>Various (see admin section)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 id="teleport-commands">Teleport Commands (TPA)</h2>
+            
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Usage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/tpa &lt;player&gt;</code></td>
+                        <td>Request to teleport to another player</td>
+                        <td><code>/tpa Buddytohelpu</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/tpahere &lt;player&gt;</code></td>
+                        <td>Request a player to teleport to you</td>
+                        <td><code>/tpahere Buddytohelpu</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/tpaccept</code></td>
+                        <td>Accept a pending TPA request</td>
+                        <td><code>/tpaccept</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/tpdeny</code></td>
+                        <td>Deny a pending TPA request</td>
+                        <td><code>/tpdeny</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/tpcancel</code></td>
+                        <td>Cancel your outgoing TPA request</td>
+                        <td><code>/tpcancel</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>TPA Example Workflow</h3>
+            <pre><code># Player1 wants to visit Player2
+/tpa Player2
+
+# Player2 sees notification and accepts
+/tpaccept
+
+# Player1 teleports to Player2 after warmup
+# [5 second warmup, then teleport]</code></pre>
+
+            <h2 id="home-commands">Home Commands</h2>
+            
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Usage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/sethome [name]</code></td>
+                        <td>Set a home at your current location</td>
+                        <td><code>/sethome base</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/home [name]</code></td>
+                        <td>Teleport to a saved home</td>
+                        <td><code>/home base</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/delhome &lt;name&gt;</code></td>
+                        <td>Delete a saved home</td>
+                        <td><code>/delhome old_base</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/homes</code></td>
+                        <td>Open home management GUI</td>
+                        <td><code>/homes</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Home System Features</h3>
+            <ul>
+                <li>Default limit: 3 homes per player</li>
+                <li>VIP limit: 10 homes (configurable)</li>
+                <li>Beautiful GUI for management</li>
+                <li>Configurable cooldowns</li>
+                <li>Warmup delays for teleportation</li>
+            </ul>
+
+            <h2 id="warp-commands">Warp Commands</h2>
+            
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Permission</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/warp &lt;name&gt;</code></td>
+                        <td>Teleport to a server warp</td>
+                        <td>None (public access)</td>
+                    </tr>
+                    <tr>
+                        <td><code>/warps</code></td>
+                        <td>Open warp list GUI</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td><code>/setwarp &lt;name&gt;</code></td>
+                        <td>Create a warp at current location</td>
+                        <td><code>hysuite.setwarp</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/delwarp &lt;name&gt;</code></td>
+                        <td>Delete a server warp</td>
+                        <td><code>hysuite.delwarp</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Warp Examples</h3>
+            <pre><code># Admin creates warps
+/setwarp spawn
+/setwarp shop
+/setwarp pvp
+
+# Players use warps
+/warp spawn
+/warps  # Opens GUI</code></pre>
+
+            <h2 id="spawn-commands">Spawn Commands</h2>
+            
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Permission</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/spawn</code></td>
+                        <td>Teleport to server spawn</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td><code>/setspawn</code></td>
+                        <td>Set the server spawn point</td>
+                        <td><code>hysuite.setspawn</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 id="utility-commands">Utility Commands</h2>
+            
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Permission</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/back</code></td>
+                        <td>Return to previous location</td>
+                        <td>None</td>
+                    </tr>
+                    <tr>
+                        <td><code>/rtp</code></td>
+                        <td>Random teleport in world</td>
+                        <td>None</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 id="admin-commands">Admin Commands</h2>
+            
+            <h3>Rank Management</h3>
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Permission</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/hys rank</code></td>
+                        <td>Open rank management GUI</td>
+                        <td><code>hysuite.admin.ranks</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/hys assign &lt;rank&gt;</code></td>
+                        <td>Open player assignment GUI</td>
+                        <td><code>hysuite.admin.ranks</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/hys setrank &lt;player&gt; &lt;rank&gt;</code></td>
+                        <td>Set a player's rank</td>
+                        <td><code>hysuite.admin.setrank</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/hys removerank &lt;player&gt;</code></td>
+                        <td>Remove a player's rank</td>
+                        <td><code>hysuite.admin.setrank</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Player Management</h3>
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Permission</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/hys playerinfo &lt;player&gt;</code></td>
+                        <td>View detailed player information</td>
+                        <td><code>hysuite.admin.playerinfo</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/vanish</code></td>
+                        <td>Toggle vanish mode (invisible)</td>
+                        <td><code>hysuite.vanish</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/fly</code></td>
+                        <td>Toggle fly mode</td>
+                        <td><code>hysuite.fly</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Teleport Management</h3>
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Permission</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/tp &lt;player&gt;</code></td>
+                        <td>Teleport to a player</td>
+                        <td><code>hysuite.htp</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/tphere &lt;player&gt;</code></td>
+                        <td>Teleport a player to you</td>
+                        <td><code>hysuite.htphere</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>System Commands</h3>
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Permission</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/hys reload</code></td>
+                        <td>Reload plugin configuration</td>
+                        <td><code>hysuite.admin.reload</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 id="messaging-commands">Messaging Commands</h2>
+            
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Usage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/msg &lt;player&gt; &lt;message&gt;</code></td>
+                        <td>Send a private message</td>
+                        <td><code>/msg Player1 Hello!</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/reply &lt;message&gt;</code></td>
+                        <td>Reply to last private message</td>
+                        <td><code>/reply Thanks!</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>/adminchat [group]</code></td>
+                        <td>Toggle admin chat channels</td>
+                        <td><code>/adminchat staff</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Admin Chat Groups</h3>
+            <ul>
+                <li><strong>Staff Chat</strong> - <code>hysuite.adminchat.staff</code></li>
+                <li><strong>Admin Chat</strong> - <code>hysuite.adminchat.admin</code></li>
+            </ul>
+
+            <h2 id="command-aliases">Command Aliases</h2>
+            
+            <p>Quick reference for command shortcuts:</p>
+            <ul>
+                <li><code>/hysuite</code> = <code>/hys</code></li>
+                <li><code>/tpaccept</code> = <code>/tpa accept</code></li>
+                <li><code>/tpdeny</code> = <code>/tpa deny</code></li>
+                <li><code>/adminchat</code> = <code>/ac</code></li>
+            </ul>
+
+            <h2 id="cooldowns-warmups">Cooldowns & Warmups</h2>
+            
+            <div class="alert alert-info">
+                <strong>Understanding Delays:</strong>
+                <ul>
+                    <li><strong>Warmup</strong> - Delay before teleport happens (can be cancelled by movement)</li>
+                    <li><strong>Cooldown</strong> - Delay before command can be used again</li>
+                </ul>
+            </div>
+
+            <h3>Default Timings</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Warmup</th>
+                        <th>Cooldown</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>TPA</td>
+                        <td>5 seconds</td>
+                        <td>30 seconds</td>
+                    </tr>
+                    <tr>
+                        <td>Home</td>
+                        <td>5 seconds</td>
+                        <td>30 seconds</td>
+                    </tr>
+                    <tr>
+                        <td>Warp</td>
+                        <td>5 seconds</td>
+                        <td>30 seconds</td>
+                    </tr>
+                    <tr>
+                        <td>Spawn</td>
+                        <td>5 seconds</td>
+                        <td>None</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Bypass:</strong> Use <code>hysuite.cooldown.bypass</code> permission to skip all delays.</p>
+
+            <h2 id="color-codes">Color Support</h2>
+            
+            <p>HySuite supports multiple color formats in messages:</p>
+
+            <h3>MiniMessage Tags</h3>
+            <pre><code>&lt;red&gt;Error message&lt;/red&gt;
+&lt;green&gt;Success!&lt;/green&gt;
+&lt;#FF5555&gt;Custom hex color&lt;/&gt;
+&lt;bold&gt;Bold text&lt;/bold&gt;
+&lt;italic&gt;Italic text&lt;/italic&gt;</code></pre>
+
+            <h3>Legacy Codes</h3>
+            <pre><code>&amp;cError message
+&amp;aSuccess!
+&amp;#FF5555Custom hex color
+&amp;lBold &amp;oItalic</code></pre>
+
+            <h3>Named Colors</h3>
+            <p>Supported color names: BLACK, DARK_BLUE, DARK_GREEN, DARK_AQUA, DARK_RED, DARK_PURPLE, GOLD, GRAY, DARK_GRAY, BLUE, GREEN, AQUA, RED, LIGHT_PURPLE, YELLOW, WHITE, ORANGE, PURPLE, PINK, LIME, CYAN</p>
+
+            <h2 id="tips">Pro Tips</h2>
+            
+            <div class="alert alert-success">
+                <strong>Efficiency Tips:</strong>
+                <ul>
+                    <li>Use <code>/homes</code> GUI for quick home management</li>
+                    <li>Use <code>/warps</code> GUI to see all available warps</li>
+                    <li>Use <code>/reply</code> instead of typing player names</li>
+                    <li>Set multiple homes for different purposes (base, farm, mine)</li>
+                    <li>Admin: Use rank GUI instead of commands for bulk operations</li>
+                </ul>
+            </div>
+
+            <div class="page-nav">
+                <a href="installation.html" class="page-nav-link page-nav-prev">
+                    <span class="page-nav-label">← Previous</span>
+                    <span class="page-nav-title">Installation</span>
+                </a>
+                <a href="permissions.html" class="page-nav-link page-nav-next">
+                    <span class="page-nav-label">Next →</span>
+                    <span class="page-nav-title">Permissions</span>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 HySuite by Buddytohelpu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

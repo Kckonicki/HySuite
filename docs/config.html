@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Configuration guide for HySuite - Customize your server settings">
+    <title>Configuration Guide - HySuite</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/docs.css">
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="../images/logo.svg" alt="HySuite Logo" class="logo">
+                <a href="../index.html" style="color:white;text-decoration:none;">HySuite</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="installation.html">Docs</a></li>
+                <li><a href="../index.html#download">Download</a></li>
+                <li><a href="https://discord.gg/vPHmVASQAN" target="_blank">Discord</a></li>
+                <li><a href="https://github.com/Kckonicki/HySuite" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="docs-container">
+        <aside class="docs-sidebar">
+            <h3>Documentation</h3>
+            <ul>
+                <li><a href="installation.html">Installation</a></li>
+                <li><a href="commands.html">Commands</a></li>
+                <li><a href="permissions.html">Permissions</a></li>
+                <li><a href="config.html" class="active">Configuration</a></li>
+            </ul>
+        </aside>
+
+        <main class="docs-content">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>›</span>
+                <span>Configuration</span>
+            </div>
+
+            <h1>Configuration Guide</h1>
+            <p>Customize HySuite to match your server's needs with these configuration options.</p>
+
+            <div class="alert alert-warning">
+                <strong>Important:</strong> After editing configuration files, use <code>/hys reload</code> to apply changes without restarting the server.
+            </div>
+
+            <h2 id="file-locations">File Locations</h2>
+            
+            <p>All configuration files are located in:</p>
+            <pre><code>Server/data/plugins/HySuite/
+├── config.json          # Main configuration
+├── ranks.json           # Rank definitions
+├── homes.json           # Player homes (auto-managed)
+├── warps.json           # Server warps (auto-managed)
+└── lang/
+    ├── en.json          # English language
+    └── fr.json          # French language</code></pre>
+
+            <h2 id="main-config">Main Configuration (config.json)</h2>
+            
+            <h3>Default Configuration</h3>
+            <pre><code>{
+  "language": "en",
+  "teleportWarmup": 5,
+  "teleportCooldown": 30,
+  "maxHomes": 3,
+  "vipMaxHomes": 10,
+  "rtpMinDistance": 100,
+  "rtpMaxDistance": 5000,
+  "vipCooldownReduction": 0.5,
+  "enableRankSystem": true,
+  "enableJoinMessages": true
+}</code></pre>
+
+            <h3>Configuration Options</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Option</th>
+                        <th>Type</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>language</code></td>
+                        <td>String</td>
+                        <td>"en"</td>
+                        <td>Language file to use (en, fr)</td>
+                    </tr>
+                    <tr>
+                        <td><code>teleportWarmup</code></td>
+                        <td>Integer</td>
+                        <td>5</td>
+                        <td>Seconds before teleport (can be cancelled)</td>
+                    </tr>
+                    <tr>
+                        <td><code>teleportCooldown</code></td>
+                        <td>Integer</td>
+                        <td>30</td>
+                        <td>Seconds before command can be used again</td>
+                    </tr>
+                    <tr>
+                        <td><code>maxHomes</code></td>
+                        <td>Integer</td>
+                        <td>3</td>
+                        <td>Maximum homes for default players</td>
+                    </tr>
+                    <tr>
+                        <td><code>vipMaxHomes</code></td>
+                        <td>Integer</td>
+                        <td>10</td>
+                        <td>Maximum homes for VIP players</td>
+                    </tr>
+                    <tr>
+                        <td><code>rtpMinDistance</code></td>
+                        <td>Integer</td>
+                        <td>100</td>
+                        <td>Minimum blocks from origin for /rtp</td>
+                    </tr>
+                    <tr>
+                        <td><code>rtpMaxDistance</code></td>
+                        <td>Integer</td>
+                        <td>5000</td>
+                        <td>Maximum blocks from origin for /rtp</td>
+                    </tr>
+                    <tr>
+                        <td><code>vipCooldownReduction</code></td>
+                        <td>Float</td>
+                        <td>0.5</td>
+                        <td>VIP cooldown multiplier (0.5 = 50% faster)</td>
+                    </tr>
+                    <tr>
+                        <td><code>enableRankSystem</code></td>
+                        <td>Boolean</td>
+                        <td>true</td>
+                        <td>Enable/disable rank system</td>
+                    </tr>
+                    <tr>
+                        <td><code>enableJoinMessages</code></td>
+                        <td>Boolean</td>
+                        <td>true</td>
+                        <td>Enable/disable custom join messages</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Example Configurations</h3>
+            
+            <h4>Hardcore Server (High Cooldowns)</h4>
+            <pre><code>{
+  "language": "en",
+  "teleportWarmup": 10,
+  "teleportCooldown": 300,
+  "maxHomes": 1,
+  "vipMaxHomes": 3,
+  "rtpMinDistance": 500,
+  "rtpMaxDistance": 10000
+}</code></pre>
+
+            <h4>Casual Server (Low Cooldowns)</h4>
+            <pre><code>{
+  "language": "en",
+  "teleportWarmup": 0,
+  "teleportCooldown": 5,
+  "maxHomes": 10,
+  "vipMaxHomes": 50,
+  "rtpMinDistance": 50,
+  "rtpMaxDistance": 2000
+}</code></pre>
+
+            <h2 id="ranks-config">Ranks Configuration (ranks.json)</h2>
+            
+            <h3>Default Ranks</h3>
+            <pre><code>{
+  "ranks": [
+    {
+      "id": "default",
+      "displayName": "Default",
+      "priority": 0,
+      "permissions": []
+    },
+    {
+      "id": "admin",
+      "displayName": "Admin",
+      "priority": 100,
+      "permissions": [
+        "hysuite.admin.ranks",
+        "hysuite.fly",
+        "hysuite.vanish"
+      ]
+    }
+  ]
+}</code></pre>
+
+            <h3>Rank Structure</h3>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Field</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>id</code></td>
+                        <td>String</td>
+                        <td>Unique rank identifier (lowercase, no spaces)</td>
+                    </tr>
+                    <tr>
+                        <td><code>displayName</code></td>
+                        <td>String</td>
+                        <td>Human-readable name shown in GUIs</td>
+                    </tr>
+                    <tr>
+                        <td><code>priority</code></td>
+                        <td>Integer</td>
+                        <td>Rank weight (higher = more important)</td>
+                    </tr>
+                    <tr>
+                        <td><code>permissions</code></td>
+                        <td>Array</td>
+                        <td>List of HySuite permissions</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Complete Rank Example</h3>
+            <pre><code>{
+  "ranks": [
+    {
+      "id": "default",
+      "displayName": "Member",
+      "priority": 0,
+      "permissions": []
+    },
+    {
+      "id": "vip",
+      "displayName": "VIP",
+      "priority": 10,
+      "permissions": [
+        "hysuite.vip",
+        "hysuite.vip.homes",
+        "hysuite.cooldown.bypass"
+      ]
+    },
+    {
+      "id": "helper",
+      "displayName": "Helper",
+      "priority": 50,
+      "permissions": [
+        "hysuite.vip",
+        "hysuite.adminchat.staff",
+        "hysuite.vanish"
+      ]
+    },
+    {
+      "id": "moderator",
+      "displayName": "Moderator",
+      "priority": 75,
+      "permissions": [
+        "hysuite.vip",
+        "hysuite.adminchat.staff",
+        "hysuite.vanish",
+        "hysuite.htp",
+        "hysuite.htphere",
+        "hysuite.admin.playerinfo"
+      ]
+    },
+    {
+      "id": "admin",
+      "displayName": "Admin",
+      "priority": 100,
+      "permissions": [
+        "hysuite.admin.ranks",
+        "hysuite.admin.setrank",
+        "hysuite.admin.reload",
+        "hysuite.adminchat.admin",
+        "hysuite.fly",
+        "hysuite.vanish",
+        "hysuite.setwarp",
+        "hysuite.delwarp"
+      ]
+    }
+  ]
+}</code></pre>
+
+            <div class="alert alert-success">
+                <strong>Pro Tip:</strong> Edit ranks using the in-game GUI (<code>/hys rank</code>) for easier management!
+            </div>
+
+            <h2 id="language-files">Language Files</h2>
+            
+            <h3>Supported Languages</h3>
+            <ul>
+                <li><strong>English</strong> - <code>lang/en.json</code> (149 keys)</li>
+                <li><strong>French</strong> - <code>lang/fr.json</code> (149 keys)</li>
+            </ul>
+
+            <h3>Changing Language</h3>
+            <p>Edit <code>config.json</code>:</p>
+            <pre><code>{
+  "language": "fr"  // Change to French
+}</code></pre>
+
+            <p>Then reload: <code>/hys reload</code></p>
+
+            <h3>Language File Structure</h3>
+            <pre><code>{
+  "prefix": "[HySuite]",
+  "teleport": {
+    "warmup": "Teleporting in {seconds} seconds...",
+    "cancelled": "Teleport cancelled!",
+    "success": "Teleported successfully!"
+  },
+  "home": {
+    "set": "Home '{name}' has been set!",
+    "deleted": "Home '{name}' has been deleted!",
+    "notFound": "Home '{name}' not found!"
+  }
+}</code></pre>
+
+            <h3>Creating Custom Language</h3>
+            <ol>
+                <li>Copy <code>lang/en.json</code> to <code>lang/custom.json</code></li>
+                <li>Translate all values (keep keys the same)</li>
+                <li>Set <code>"language": "custom"</code> in config.json</li>
+                <li>Reload: <code>/hys reload</code></li>
+            </ol>
+
+            <h2 id="data-files">Data Files (Auto-Managed)</h2>
+            
+            <div class="alert alert-warning">
+                <strong>Warning:</strong> These files are auto-managed by HySuite. Manual editing may cause data loss!
+            </div>
+
+            <h3>homes.json</h3>
+            <p>Stores all player homes:</p>
+            <pre><code>{
+  "player-uuid": {
+    "homes": [
+      {
+        "name": "base",
+        "world": "world",
+        "x": 100.5,
+        "y": 64.0,
+        "z": -200.5,
+        "yaw": 0.0,
+        "pitch": 0.0
+      }
+    ]
+  }
+}</code></pre>
+
+            <h3>warps.json</h3>
+            <p>Stores server warps:</p>
+            <pre><code>{
+  "warps": [
+    {
+      "name": "spawn",
+      "world": "world",
+      "x": 0.0,
+      "y": 100.0,
+      "z": 0.0,
+      "yaw": 0.0,
+      "pitch": 0.0
+    }
+  ]
+}</code></pre>
+
+            <h2 id="performance-tuning">Performance Tuning</h2>
+            
+            <h3>High-Performance Settings</h3>
+            <p>For servers with many players:</p>
+            <pre><code>{
+  "teleportWarmup": 3,
+  "teleportCooldown": 60,
+  "maxHomes": 5,
+  "vipMaxHomes": 15,
+  "rtpMinDistance": 200,
+  "rtpMaxDistance": 3000
+}</code></pre>
+
+            <h3>Optimization Tips</h3>
+            <ul>
+                <li>Higher cooldowns reduce server load</li>
+                <li>Lower max homes reduces database size</li>
+                <li>Smaller RTP range = faster calculations</li>
+                <li>Disable unused features</li>
+            </ul>
+
+            <h2 id="backup-restore">Backup & Restore</h2>
+            
+            <h3>Manual Backup</h3>
+            <pre><code># Stop server or use /hys reload first
+
+# Backup all data
+cp -r Server/data/plugins/HySuite/ backup/HySuite-backup/
+
+# Backup specific file
+cp Server/data/plugins/HySuite/homes.json backup/</code></pre>
+
+            <h3>Restore from Backup</h3>
+            <pre><code># Stop server
+
+# Restore all data
+cp -r backup/HySuite-backup/ Server/data/plugins/HySuite/
+
+# Restore specific file
+cp backup/homes.json Server/data/plugins/HySuite/
+
+# Start server</code></pre>
+
+            <h2 id="migration">Migration from Other Plugins</h2>
+            
+            <h3>From Essentials</h3>
+            <p>Currently requires manual conversion. Contact support for assistance.</p>
+
+            <h3>From Custom System</h3>
+            <p>Format your data to match homes.json/warps.json structure, then reload.</p>
+
+            <h2 id="troubleshooting-config">Troubleshooting Configuration</h2>
+            
+            <h3>Config Not Loading</h3>
+            <ol>
+                <li>Check JSON syntax (use <a href="https://jsonlint.com">jsonlint.com</a>)</li>
+                <li>Verify file permissions (readable by server)</li>
+                <li>Check server log for error messages</li>
+                <li>Try deleting config.json (will regenerate defaults)</li>
+            </ol>
+
+            <h3>Changes Not Applying</h3>
+            <ol>
+                <li>Use <code>/hys reload</code> after editing</li>
+                <li>Verify you edited correct file location</li>
+                <li>Check for typos in option names</li>
+                <li>Restart server if reload doesn't work</li>
+            </ol>
+
+            <h3>Invalid JSON Error</h3>
+            <p>Common mistakes:</p>
+            <ul>
+                <li>Missing comma between entries</li>
+                <li>Extra comma after last entry</li>
+                <li>Missing quotes around strings</li>
+                <li>Incorrect bracket nesting</li>
+            </ul>
+
+            <h2 id="advanced-config">Advanced Configuration</h2>
+            
+            <h3>Per-Command Cooldowns</h3>
+            <p>Coming in future version - individual cooldowns per command type.</p>
+
+            <h3>World-Specific Settings</h3>
+            <p>Coming in future version - different settings per world.</p>
+
+            <h3>Database Support</h3>
+            <p>Coming in future version - MySQL/PostgreSQL support for large servers.</p>
+
+            <h2 id="best-practices">Configuration Best Practices</h2>
+            
+            <div class="alert alert-success">
+                <strong>Recommended Practices:</strong>
+                <ul>
+                    <li>Always backup before making changes</li>
+                    <li>Test changes on development server first</li>
+                    <li>Use <code>/hys reload</code> instead of full restart</li>
+                    <li>Document your custom settings</li>
+                    <li>Keep backups of working configurations</li>
+                    <li>Validate JSON before applying</li>
+                    <li>Start with defaults, adjust gradually</li>
+                </ul>
+            </div>
+
+            <h2 id="example-setups">Example Server Setups</h2>
+            
+            <h3>Creative Server</h3>
+            <pre><code>{
+  "language": "en",
+  "teleportWarmup": 0,
+  "teleportCooldown": 0,
+  "maxHomes": 50,
+  "vipMaxHomes": 100,
+  "rtpMinDistance": 0,
+  "rtpMaxDistance": 1000,
+  "vipCooldownReduction": 0.0
+}</code></pre>
+
+            <h3>Survival Server</h3>
+            <pre><code>{
+  "language": "en",
+  "teleportWarmup": 5,
+  "teleportCooldown": 60,
+  "maxHomes": 3,
+  "vipMaxHomes": 10,
+  "rtpMinDistance": 500,
+  "rtpMaxDistance": 5000,
+  "vipCooldownReduction": 0.5
+}</code></pre>
+
+            <h3>Hardcore/PvP Server</h3>
+            <pre><code>{
+  "language": "en",
+  "teleportWarmup": 10,
+  "teleportCooldown": 300,
+  "maxHomes": 1,
+  "vipMaxHomes": 3,
+  "rtpMinDistance": 1000,
+  "rtpMaxDistance": 10000,
+  "vipCooldownReduction": 0.7
+}</code></pre>
+
+            <div class="page-nav">
+                <a href="permissions.html" class="page-nav-link page-nav-prev">
+                    <span class="page-nav-label">← Previous</span>
+                    <span class="page-nav-title">Permissions</span>
+                </a>
+                <a href="installation.html" class="page-nav-link page-nav-next">
+                    <span class="page-nav-label">Next →</span>
+                    <span class="page-nav-title">Installation</span>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 HySuite by Buddytohelpu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

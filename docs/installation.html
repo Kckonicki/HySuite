@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Installation Guide - HySuite</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/docs.css">
+    <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <img src="../images/logo.svg" alt="HySuite Logo" class="logo">
+                <a href="../index.html" style="color:white;text-decoration:none;">HySuite</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="installation.html">Docs</a></li>
+                <li><a href="../index.html#download">Download</a></li>
+                <li><a href="https://discord.gg/vPHmVASQAN" target="_blank">Discord</a></li>
+                <li><a href="https://github.com/Kckonicki/HySuite" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="docs-container">
+        <aside class="docs-sidebar">
+            <h3>Documentation</h3>
+            <ul>
+                <li><a href="installation.html" class="active">Installation</a></li>
+                <li><a href="commands.html">Commands</a></li>
+                <li><a href="permissions.html">Permissions</a></li>
+                <li><a href="config.html">Configuration</a></li>
+            </ul>
+        </aside>
+
+        <main class="docs-content">
+            <div class="breadcrumb">
+                <a href="../index.html">Home</a>
+                <span>›</span>
+                <span>Installation</span>
+            </div>
+
+            <h1>Installation Guide</h1>
+            <p>Get HySuite up and running on your Hytale server in minutes.</p>
+
+            <h2 id="requirements">Requirements</h2>
+            <ul>
+                <li><strong>Hytale Server</strong> - Latest version</li>
+                <li><strong>Java 17 or higher</strong></li>
+                <li><strong>No external dependencies</strong> - HySuite is all-in-one!</li>
+            </ul>
+
+            <h2 id="quick-install">Quick Installation</h2>
+            
+            <h3>Step 1: Download</h3>
+            <p>Download the latest release from the <a href="../index.html#download">download page</a> or <a href="https://github.com/Kckonicki/HySuite/releases">GitHub releases</a>.</p>
+
+            <h3>Step 2: Install</h3>
+            <p>Copy the JAR file to your server's plugins folder:</p>
+            <pre><code>copy hysuite-1.0.0.jar %HYTALE_HOME%/Server/plugins/</code></pre>
+
+            <h3>Step 3: Start Server</h3>
+            <p>Start your Hytale server. HySuite will load automatically and create default configuration files.</p>
+
+            <div class="alert alert-success">
+                <strong>Success!</strong> You should see <code>[HySuite] HySuite loaded with rank system!</code> in your server logs.
+            </div>
+
+            <h2 id="first-time-setup">First Time Setup</h2>
+            
+            <h3>Enable the Plugin</h3>
+            <p>If the plugin doesn't load, check your server config:</p>
+            <pre><code># Server/config.json
+"Mods": {
+  "com.Buddytohelpu:HySuite": {
+    "Enabled": true  // Make sure this is true
+  }
+}</code></pre>
+
+            <h3>Created Files</h3>
+            <p>On first run, HySuite creates:</p>
+            <pre><code>Server/data/plugins/HySuite/
+├── config.json          # Main configuration
+├── ranks.json           # Rank definitions (2 defaults)
+├── homes.json           # Player homes (empty)
+├── warps.json           # Server warps (empty)
+└── lang/
+    └── en.json          # English language file</code></pre>
+
+            <h2 id="verification">Verify Installation</h2>
+            
+            <h3>Check Server Logs</h3>
+            <p>Look for these messages in your server log:</p>
+            <pre><code>[INFO] [PluginManager] - com.Buddytohelpu:HySuite from path hysuite-1.0.0.jar
+[INFO] [HySuite|P] No existing config found, will create fresh config.
+[INFO] [HySuite|P] [EN] Created language file with 149 keys
+[INFO] [HySuite|P] Saved 2 ranks to ranks.json
+[INFO] [HySuite|P] HySuite loaded with rank system!
+[INFO] [PluginManager] Enabled plugin com.Buddytohelpu:HySuite</code></pre>
+
+            <h3>Test Commands</h3>
+            <p>Try these commands in-game or console:</p>
+            <pre><code>/hysuite        # Show main command
+/hys rank       # Open rank GUI (requires permissions)
+/homes          # Open home GUI
+/warps          # Open warp GUI</code></pre>
+
+            <h2 id="configuration">Initial Configuration</h2>
+            
+            <h3>Set Up Permissions</h3>
+            <p>Give yourself admin permissions (using LuckPerms or similar):</p>
+            <pre><code>/lp user &lt;name&gt; permission set hysuite.admin.ranks true
+/lp user &lt;name&gt; permission set hysuite.fly true
+/lp user &lt;name&gt; permission set hysuite.vanish true</code></pre>
+
+            <h3>Set Spawn Point</h3>
+            <pre><code>/setspawn</code></pre>
+
+            <h3>Create First Warp</h3>
+            <pre><code>/setwarp spawn</code></pre>
+
+            <h2 id="troubleshooting">Troubleshooting</h2>
+            
+            <h3>Plugin Not Loading</h3>
+            <div class="alert alert-warning">
+                <strong>Check:</strong>
+                <ul>
+                    <li>JAR is in correct plugins folder</li>
+                    <li>Java 17+ is installed</li>
+                    <li>Plugin is enabled in config.json</li>
+                    <li>Server logs for error messages</li>
+                </ul>
+            </div>
+
+            <h3>Commands Not Working</h3>
+            <ul>
+                <li>Verify permissions are set correctly</li>
+                <li>Check command cooldowns aren't active</li>
+                <li>Ensure player isn't in warmup period</li>
+            </ul>
+
+            <h3>GUI Not Opening</h3>
+            <ul>
+                <li>Verify UI files are in JAR</li>
+                <li>Check server log for UI-related errors</li>
+                <li>Try: <code>/hys rank</code> instead of direct GUI command</li>
+            </ul>
+
+            <h2 id="next-steps">Next Steps</h2>
+            <p>Now that HySuite is installed, learn about:</p>
+            <ul>
+                <li><a href="commands.html">All available commands</a></li>
+                <li><a href="permissions.html">Permission system</a></li>
+                <li><a href="config.html">Configuration options</a></li>
+            </ul>
+
+            <div class="page-nav">
+                <a href="commands.html" class="page-nav-link page-nav-next">
+                    <span class="page-nav-label">Next →</span>
+                    <span class="page-nav-title">Commands Reference</span>
+                </a>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 HySuite by Buddytohelpu. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>
+```
+
+---
+
+### File: _config.yml (Jekyll Configuration)
+
+```yaml
+# Site settings
+title: HySuite
+description: Complete Server Essentials for Hytale
+url: "https://Kckonicki.github.io"
+baseurl: "/HySuite"
+author: Buddytohelpu
+
+# Build settings
+markdown: kramdown

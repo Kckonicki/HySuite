@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.Buddytohelpu</groupId>
+    <artifactId>hysuite</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>HySuite</name>
+    <description>Essential commands for Hytale servers - TPA, homes, warps, spawn and more!</description>
+
+    <properties>
+        <java.version>17</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        
+        <!-- Plugin manifest properties -->
+        <plugin_group>com.Buddytohelpu</plugin_group>
+        <plugin_name>HySuite</plugin_name>
+        <plugin_version>1.0.0</plugin_version>
+        <plugin_description>Essential commands for Hytale servers - TPA, homes, warps, spawn and more!</plugin_description>
+        <plugin_author>Buddytohelpu</plugin_author>
+        <plugin_website></plugin_website>
+        <server_version>*</server_version>
+        <plugin_main_entrypoint>com.Buddytohelpu.hysuite.HySuitePlugin</plugin_main_entrypoint>
+        
+        <!-- 
+        OPTION 1: Uncomment this line and set the path to your HytaleServer.jar
+        <hytale.server.path>C:/Path/To/HytaleServer.jar</hytale.server.path>
+        -->
+    </properties>
+
+    <dependencies>
+        <!-- Hytale Server API -->
+        <!-- CHOOSE ONE OF THE THREE OPTIONS BELOW -->
+        
+        <!-- OPTION 1: Use Maven property (Uncomment this and set hytale.server.path above) -->
+        <!--
+        <dependency>
+            <groupId>com.hypixel.hytale</groupId>
+            <artifactId>server</artifactId>
+            <version>local</version>
+            <scope>system</scope>
+            <systemPath>${env.HYTALE_HOME}/Server/HytaleServer.jar</systemPath>
+        </dependency>
+        -->
+        
+        <!-- OPTION 2: Use environment variable (Uncomment this and set HYTALE_HOME env var) -->
+        <!--
+        Set environment variable:
+        Windows: set HYTALE_HOME=C:\Users\[username]\AppData\Roaming\Hytale\install\release\package\game\latest
+        Linux/Mac: export HYTALE_HOME=/path/to/hytale
+        -->
+        <dependency>
+            <groupId>com.hypixel.hytale</groupId>
+            <artifactId>server</artifactId>
+            <version>local</version>
+            <scope>system</scope>
+            <systemPath>${env.HYTALE_HOME}/Server/HytaleServer.jar</systemPath>
+        </dependency>
+        
+        <!-- OPTION 3: Use local Maven repository (Recommended - see below) -->
+        <!--
+        First install HytaleServer.jar to local Maven repo:
+        
+        mvn install:install-file \
+          -Dfile=/path/to/HytaleServer.jar \
+          -DgroupId=com.hypixel.hytale \
+          -DartifactId=server \
+          -Dversion=1.0.0 \
+          -Dpackaging=jar
+          
+        Then uncomment this dependency:
+        
+        <dependency>
+            <groupId>com.hypixel.hytale</groupId>
+            <artifactId>server</artifactId>
+            <version>1.0.0</version>
+            <scope>provided</scope>
+        </dependency>
+        -->
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}-${project.version}</finalName>
+        
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        
+        <plugins>
+            <!-- Java compiler -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <release>${java.version}</release>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+
+            <!-- Build JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Built-By>Maven</Built-By>
+                            <Implementation-Title>${project.name}</Implementation-Title>
+                            <Implementation-Version>${project.version}</Implementation-Version>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- Resource plugin to ensure all resources are copied -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.3.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
