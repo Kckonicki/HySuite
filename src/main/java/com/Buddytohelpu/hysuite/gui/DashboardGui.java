@@ -164,14 +164,14 @@ public class DashboardGui extends InteractiveCustomUIPage<DashboardData> {
                 case "OpenProfile":
                     Player player3 = store.getComponent(ref, Player.getComponentType());
                     if (player3 != null) {
-                        player3.sendMessage(Message.raw("§ePlayer profile coming soon in v1.0.1!"));
+                        player3.sendMessage(Message.raw("§ePlayer profile coming soon in v1.0.2!"));
                     }
                     break;
 
                 case "OpenSettings":
                     Player player4 = store.getComponent(ref, Player.getComponentType());
                     if (player4 != null) {
-                        player4.sendMessage(Message.raw("§eSettings menu coming soon in v1.0.1!"));
+                        player4.sendMessage(Message.raw("§eSettings menu coming soon in v1.0.2!"));
                     }
                     break;
             }
