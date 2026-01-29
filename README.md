@@ -6,7 +6,7 @@
 
 **Complete Server Essentials for Hytale**
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/Kckonicki/HySuite/releases)
+[![Version](https://img.shields.io/badge/version-1.0.1-blue.svg)](https://github.com/Kckonicki/HySuite/releases)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE.md)
 [![Documentation](https://img.shields.io/badge/docs-available-brightgreen.svg)](https://kckonicki.github.io/HySuite/)
 
@@ -216,11 +216,12 @@ This project is licensed under the MIT License - see [LICENSE.md](LICENSE.md) fo
 
 ## 🎯 Roadmap
 
-### v1.0.1 (Planned)
-- [ ] Huge UI/GUI Enhancements
-- [ ] More commands
-- [ ] Player Info
-- [ ] Main HySuite Dashboard
+### v1.0.1 (Released!)
+- [✅] Huge UI/GUI Enhancements
+- [✅] More commands
+- [ ] Player Info (Planned for v1.0.2)
+- [ ] Settings (Planned for v1.0.2)
+- [✅] Main HySuite Dashboard
 
 ### v1.1.0 (Planned)
 - [ ] Economy system
@@ -242,14 +243,13 @@ See [ROADMAP.md](ROADMAP.md) for detailed plans.
 
 ## 📊 Version History
 
-### v1.0.0 (January 25, 2026)
-- Initial public release
-- Complete rebranding from Hyssentials
-- 25+ commands implemented
-- 12 GUI interfaces
-- 17 permission nodes
-- Multi-language support
-- Professional documentation website
+### v1.0.1 (January 28, 2026)
+New Features
+✅ New /hys dashboard command
+✅ New HySuite Dashboard UI
+✅ Minor bug fixes
+✅ Documentation Updates
+✅ POM Update
 
 ---
 
