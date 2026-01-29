@@ -124,6 +124,41 @@
 # Player1 teleports to Player2 after warmup
 # [5 second warmup, then teleport]</code></pre>
 
+            <h2 id="dashboard-commands">Dashboard & Quick Access</h2>
+            
+            <div class="alert alert-info">
+                <strong>New in v1.0.1:</strong> The dashboard provides quick access to all HySuite features and real-time statistics!
+            </div>
+
+            <table class="command-table">
+                <thead>
+                    <tr>
+                        <th>Command</th>
+                        <th>Description</th>
+                        <th>Permission</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>/hys dashboard</code></td>
+                        <td>Open the HySuite dashboard GUI</td>
+                        <td>None (available to all players)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Dashboard Features</h3>
+            <ul>
+                <li><strong>Real-time Statistics:</strong> View your homes count, rank, playtime, and available warps</li>
+                <li><strong>Quick Actions:</strong> Direct buttons to Manage Homes, View Warps, Player Stats, and Settings</li>
+                <li><strong>Playtime Tracking:</strong> Automatic tracking of your time on the server</li>
+                <li><strong>Beautiful Interface:</strong> Clean, modern UI matching Hytale's aesthetic</li>
+            </ul>
+
+            <div class="screenshot-container" style="margin: 20px 0; text-align: center;">
+                <p><em>Dashboard screenshots coming soon!</em></p>
+            </div>
+
             <h2 id="home-commands">Home Commands</h2>
             
             <table class="command-table">
@@ -142,8 +177,8 @@
                     </tr>
                     <tr>
                         <td><code>/home [name]</code></td>
-                        <td>Teleport to a saved home</td>
-                        <td><code>/home base</code></td>
+                        <td>List your homes or teleport to a specific home</td>
+                        <td><code>/home</code> or <code>/home base</code></td>
                     </tr>
                     <tr>
                         <td><code>/delhome &lt;name&gt;</code></td>
@@ -167,6 +202,11 @@
                 <li>Warmup delays for teleportation</li>
             </ul>
 
+            <div class="screenshot-container" style="margin: 20px 0;">
+                <img src="../images/screenshots/homes_gui.png" alt="Home Management GUI" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                <p style="text-align: center; color: #888; margin-top: 10px;">Home management GUI with quick teleport and delete options</p>
+            </div>
+
             <h2 id="warp-commands">Warp Commands</h2>
             
             <table class="command-table">
@@ -179,8 +219,8 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><code>/warp &lt;name&gt;</code></td>
-                        <td>Teleport to a server warp</td>
+                        <td><code>/warp [name]</code></td>
+                        <td>List server warps or teleport to a specific warp</td>
                         <td>None (public access)</td>
                     </tr>
                     <tr>
@@ -210,6 +250,11 @@
 # Players use warps
 /warp spawn
 /warps  # Opens GUI</code></pre>
+
+            <div class="screenshot-container" style="margin: 20px 0;">
+                <img src="../images/screenshots/warps_gui.png" alt="Warp List GUI" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                <p style="text-align: center; color: #888; margin-top: 10px;">Server warps GUI with quick teleport access</p>
+            </div>
 
             <h2 id="spawn-commands">Spawn Commands</h2>
             
@@ -293,6 +338,21 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div class="screenshot-container" style="margin: 20px 0;">
+                <img src="../images/screenshots/rank_management.png" alt="Rank Management GUI" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                <p style="text-align: center; color: #888; margin-top: 10px;">Rank management interface for creating and editing ranks</p>
+            </div>
+
+            <div class="screenshot-container" style="margin: 20px 0;">
+                <img src="../images/screenshots/rank_creator.png" alt="Create New Rank" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                <p style="text-align: center; color: #888; margin-top: 10px;">Comprehensive rank creation with permissions and command settings</p>
+            </div>
+
+            <div class="screenshot-container" style="margin: 20px 0;">
+                <img src="../images/screenshots/rank_assign.png" alt="Assign Ranks to Players" style="max-width: 100%; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
+                <p style="text-align: center; color: #888; margin-top: 10px;">Player rank assignment interface</p>
+            </div>
 
             <h3>Player Management</h3>
             <table class="command-table">
