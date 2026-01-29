@@ -40,6 +40,7 @@ import com.Buddytohelpu.hysuite.manager.PrivateMessageManager;
 import com.Buddytohelpu.hysuite.manager.AdminChatManager;
 import com.Buddytohelpu.hysuite.manager.VanishManager;
 import com.Buddytohelpu.hysuite.manager.JoinMessageManager;
+import com.Buddytohelpu.hysuite.manager.PlaytimeManager;
 import com.Buddytohelpu.hysuite.commands.admin.VanishCommand;
 import com.Buddytohelpu.hysuite.commands.admin.FlyCommand;
 import com.Buddytohelpu.hysuite.system.PlayerDeathBackSystem;
@@ -70,6 +71,7 @@ public class HySuitePlugin extends JavaPlugin {
     private AdminChatManager adminChatManager;
     private VanishManager vanishManager;
     private JoinMessageManager joinMessageManager;
+    private PlaytimeManager playtimeManager;
     private ScheduledExecutorService permissionScheduler;
 
     public HySuitePlugin(@Nonnull JavaPluginInit init) {
@@ -101,6 +103,7 @@ public class HySuitePlugin extends JavaPlugin {
         this.adminChatManager = new AdminChatManager(this.getDataDirectory(), this.getLogger());
         this.vanishManager = new VanishManager();
         this.joinMessageManager = new JoinMessageManager(this.getDataDirectory(), this.getLogger());
+        this.playtimeManager = new PlaytimeManager(this.getDataDirectory().toFile());
 
         this.getEntityStoreRegistry().registerSystem(new PlayerDeathBackSystem(this.backManager));
 
@@ -120,18 +123,18 @@ public class HySuitePlugin extends JavaPlugin {
         this.getCommandRegistry().registerCommand(new SetHomeCommand(this.homeManager, this.rankManager));
         this.getCommandRegistry().registerCommand(new HomeCommand(this.homeManager, this.warmupManager, this.cooldownManager, this.rankManager));
         this.getCommandRegistry().registerCommand(new DelHomeCommand(this.homeManager));
-        this.getCommandRegistry().registerCommand(new HomesCommand(this.homeManager, this.rankManager));
+        this.getCommandRegistry().registerCommand(new HomesCommand(this.homeManager, this.warmupManager, this.cooldownManager, this.rankManager));
         this.getCommandRegistry().registerCommand(new SetWarpCommand(this.warpManager));
         this.getCommandRegistry().registerCommand(new WarpCommand(this.warpManager, this.warmupManager, this.cooldownManager, this.rankManager));
         this.getCommandRegistry().registerCommand(new DelWarpCommand(this.warpManager));
-        this.getCommandRegistry().registerCommand(new WarpsCommand(this.warpManager));
+        this.getCommandRegistry().registerCommand(new WarpsCommand(this.warpManager, this.warmupManager, this.cooldownManager, this.rankManager));
         this.getCommandRegistry().registerCommand(new SetSpawnCommand());
         this.getCommandRegistry().registerCommand(new SpawnCommand(this.warmupManager, this.cooldownManager, this.rankManager));
         this.getCommandRegistry().registerCommand(new BackCommand(this.backManager, this.warmupManager, this.cooldownManager, this.rankManager));
         this.getCommandRegistry().registerCommand(new RtpCommand(this.warmupManager, this.cooldownManager, this.rankManager, this.config.get().getRtpMinRange(), this.config.get().getRtpMaxRange()));
         this.getCommandRegistry().registerCommand(new TpCommand(this.backManager));
         this.getCommandRegistry().registerCommand(new TphereCommand(this.backManager));
-        this.getCommandRegistry().registerCommand(new HysCommand(this.rankManager, this.homeManager, this.config));
+        this.getCommandRegistry().registerCommand(new HysCommand(this.rankManager, this.homeManager, this.warpManager, this.playtimeManager, this.cooldownManager, this.warmupManager, this.config));
         this.getCommandRegistry().registerCommand(new MsgCommand(this.msgManager));
         this.getCommandRegistry().registerCommand(new ReplyCommand(this.msgManager));
         this.getCommandRegistry().registerCommand(new AdminChatCommand(this.adminChatManager));
@@ -144,6 +147,11 @@ public class HySuitePlugin extends JavaPlugin {
             return t;
         });
         this.permissionScheduler.scheduleAtFixedRate(this::syncAllPlayerPermissions, 1, 1, TimeUnit.MINUTES);
+        
+        // Save playtime data every 5 minutes
+        this.permissionScheduler.scheduleAtFixedRate(() -> {
+            this.playtimeManager.saveAllPlaytime();
+        }, 5, 5, TimeUnit.MINUTES);
 
         this.getLogger().at(Level.INFO).log("HySuite loaded with rank system!");
     }
@@ -151,6 +159,7 @@ public class HySuitePlugin extends JavaPlugin {
     private void onPlayerConnect(@Nonnull PlayerConnectEvent event) {
         vanishManager.onPlayerJoin(event.getPlayerRef());
         joinMessageManager.onPlayerConnect(event);
+        playtimeManager.onPlayerJoin(event.getPlayerRef().getUuid());
 
         PlayerRef player = event.getPlayerRef();
         if (!playerHasAnyRank(player)) {
@@ -173,6 +182,7 @@ public class HySuitePlugin extends JavaPlugin {
     private void onPlayerDisconnect(@Nonnull PlayerDisconnectEvent event) {
         joinMessageManager.onPlayerDisconnect(event);
         vanishManager.onPlayerLeave(event.getPlayerRef().getUuid());
+        playtimeManager.onPlayerQuit(event.getPlayerRef().getUuid());
     }
 
     private void syncAllPlayerPermissions() {

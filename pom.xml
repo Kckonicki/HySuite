@@ -8,7 +8,7 @@
 
     <groupId>com.Buddytohelpu</groupId>
     <artifactId>hysuite</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <packaging>jar</packaging>
 
     <name>HySuite</name>
@@ -21,7 +21,7 @@
         <!-- Plugin manifest properties -->
         <plugin_group>com.Buddytohelpu</plugin_group>
         <plugin_name>HySuite</plugin_name>
-        <plugin_version>1.0.0</plugin_version>
+        <plugin_version>1.0.1</plugin_version>
         <plugin_description>Essential commands for Hytale servers - TPA, homes, warps, spawn and more!</plugin_description>
         <plugin_author>Buddytohelpu</plugin_author>
         <plugin_website></plugin_website>

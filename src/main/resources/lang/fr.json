@@ -116,6 +116,9 @@
     "warp_list": {
       "title": "Warps du Serveur"
     },
+    "dashboard": {
+      "title": "Tableau de Bord HySuite"
+    },
     "rank_list": {
       "title": "Gestion des Rangs"
     },

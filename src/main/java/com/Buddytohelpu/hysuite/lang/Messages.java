@@ -125,6 +125,9 @@ public enum Messages {
     // Warp List
     UI_WARP_LIST_TITLE("ui.warp_list.title"),
 
+    // Dashboard
+    UI_DASHBOARD_TITLE("ui.dashboard.title"),
+
     // Rank List
     UI_RANK_LIST_TITLE("ui.rank_list.title"),
     UI_BTN_CREATE_NEW("ui.btn.create_new"),

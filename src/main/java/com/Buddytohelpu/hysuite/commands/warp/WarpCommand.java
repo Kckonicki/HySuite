@@ -2,16 +2,13 @@ package com.Buddytohelpu.hysuite.commands.warp;
 
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
-import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayerCommand;
-import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import com.Buddytohelpu.hysuite.data.CommandSettings;
 import com.Buddytohelpu.hysuite.data.LocationData;
-import com.Buddytohelpu.hysuite.gui.WarpListGui;
 import com.Buddytohelpu.hysuite.lang.Messages;
 import com.Buddytohelpu.hysuite.manager.CooldownManager;
 import com.Buddytohelpu.hysuite.manager.RankManager;
@@ -19,6 +16,7 @@ import com.Buddytohelpu.hysuite.manager.TeleportWarmupManager;
 import com.Buddytohelpu.hysuite.manager.WarpManager;
 import com.Buddytohelpu.hysuite.util.ChatUtil;
 import com.Buddytohelpu.hysuite.util.Permissions;
+import java.util.Set;
 import java.util.UUID;
 import javax.annotation.Nonnull;
 
@@ -50,7 +48,7 @@ public class WarpCommand extends AbstractPlayerCommand {
         String[] args = input.split("\\s+");
 
         if (args.length <= 1) {
-            openWarpGui(store, ref, playerRef);
+            listWarps(context);
             return;
         }
 
@@ -58,12 +56,16 @@ public class WarpCommand extends AbstractPlayerCommand {
         teleportToWarp(context, store, ref, playerRef, world, name);
     }
 
-    private void openWarpGui(Store<EntityStore> store, Ref<EntityStore> ref, PlayerRef playerRef) {
-        Player player = store.getComponent(ref, Player.getComponentType());
-        if (player == null) return;
-
-        player.getPageManager().openCustomPage(ref, store,
-            new WarpListGui(playerRef, warpManager, warmupManager, cooldownManager, rankManager, CustomPageLifetime.CanDismiss));
+    private void listWarps(CommandContext context) {
+        Set<String> warps = warpManager.getWarpNames();
+        if (warps.isEmpty()) {
+            context.sendMessage(ChatUtil.parse(Messages.ERROR_NO_WARPS));
+            return;
+        }
+        context.sendMessage(ChatUtil.parse(Messages.INFO_WARPS_LIST, warps.size()));
+        for (String warp : warps) {
+            context.sendMessage(ChatUtil.parse("<gray>  - " + warp + "</gray>"));
+        }
     }
 
     private void teleportToWarp(CommandContext context, Store<EntityStore> store, Ref<EntityStore> ref,

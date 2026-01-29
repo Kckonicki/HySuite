@@ -116,6 +116,9 @@
     "warp_list": {
       "title": "Server Warps"
     },
+    "dashboard": {
+      "title": "HySuite Dashboard"
+    },
     "rank_list": {
       "title": "Rank Management"
     },

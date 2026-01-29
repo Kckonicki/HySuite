@@ -2,26 +2,32 @@ package com.Buddytohelpu.hysuite.commands.home;
 
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
+import com.hypixel.hytale.protocol.packets.interface_.CustomPageLifetime;
 import com.hypixel.hytale.server.core.command.system.CommandContext;
 import com.hypixel.hytale.server.core.command.system.basecommands.AbstractPlayerCommand;
+import com.hypixel.hytale.server.core.entity.entities.Player;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import com.Buddytohelpu.hysuite.lang.Messages;
+import com.Buddytohelpu.hysuite.gui.HomeListGui;
+import com.Buddytohelpu.hysuite.manager.CooldownManager;
 import com.Buddytohelpu.hysuite.manager.HomeManager;
 import com.Buddytohelpu.hysuite.manager.RankManager;
-import com.Buddytohelpu.hysuite.util.ChatUtil;
-import java.util.Set;
-import java.util.UUID;
+import com.Buddytohelpu.hysuite.manager.TeleportWarmupManager;
 import javax.annotation.Nonnull;
 
 public class HomesCommand extends AbstractPlayerCommand {
     private final HomeManager homeManager;
+    private final TeleportWarmupManager warmupManager;
+    private final CooldownManager cooldownManager;
     private final RankManager rankManager;
 
-    public HomesCommand(@Nonnull HomeManager homeManager, @Nonnull RankManager rankManager) {
-        super("homes", "List all your homes");
+    public HomesCommand(@Nonnull HomeManager homeManager, @Nonnull TeleportWarmupManager warmupManager,
+                        @Nonnull CooldownManager cooldownManager, @Nonnull RankManager rankManager) {
+        super("homes", "Open home management GUI");
         this.homeManager = homeManager;
+        this.warmupManager = warmupManager;
+        this.cooldownManager = cooldownManager;
         this.rankManager = rankManager;
     }
 
@@ -33,17 +39,10 @@ public class HomesCommand extends AbstractPlayerCommand {
     @Override
     protected void execute(@Nonnull CommandContext context, @Nonnull Store<EntityStore> store,
                           @Nonnull Ref<EntityStore> ref, @Nonnull PlayerRef playerRef, @Nonnull World world) {
-        UUID playerUuid = playerRef.getUuid();
-        Set<String> homes = homeManager.getHomeNames(playerUuid);
-        if (homes.isEmpty()) {
-            context.sendMessage(ChatUtil.parse(Messages.ERROR_NO_HOMES));
-            return;
-        }
-        int count = homes.size();
-        int max = rankManager.getEffectiveMaxHomes(playerRef);
-        context.sendMessage(ChatUtil.parse(Messages.INFO_HOMES_LIST, count, max));
-        for (String home : homes) {
-            context.sendMessage(ChatUtil.parse("<gray>  - " + home + "</gray>"));
-        }
+        Player player = store.getComponent(ref, Player.getComponentType());
+        if (player == null) return;
+
+        player.getPageManager().openCustomPage(ref, store,
+            new HomeListGui(playerRef, homeManager, warmupManager, cooldownManager, rankManager, CustomPageLifetime.CanDismiss));
     }
 }

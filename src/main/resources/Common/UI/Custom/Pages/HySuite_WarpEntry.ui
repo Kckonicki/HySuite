@@ -41,7 +41,7 @@ Group {
 
     $C.@SmallSecondaryTextButton #TeleportButton {
       Anchor: (Width: 80, Height: 26);
-      Text: "Teleport";
+      Text: "TP";
     }
   }
 }

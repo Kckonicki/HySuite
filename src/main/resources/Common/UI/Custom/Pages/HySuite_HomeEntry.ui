@@ -41,7 +41,7 @@ Group {
 
     $C.@SmallSecondaryTextButton #TeleportButton {
       Anchor: (Width: 80, Height: 26, Right: 10);
-      Text: "Teleport";
+      Text: "TP";
     }
 
     $C.@CancelTextButton #DeleteButton {
